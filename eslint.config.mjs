@@ -1,6 +1,6 @@
-import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
@@ -17,6 +17,8 @@ export default tseslint.config(
     rules: {
       ...reactPlugin.configs['jsx-runtime'].rules,
       ...hooksPlugin.configs.recommended.rules,
+
+      '@typescript-eslint/consistent-type-imports': 'warn',
 
       // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
       '@typescript-eslint/consistent-type-definitions': 'off',
