@@ -3,11 +3,11 @@ import { render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { httpLink as TRPCClientHttpLink } from "@trpc/client";
 import { type ReactNode, useState } from "react";
-import superjson from "superjson";
 import { makeQueryClient } from "~/libs/react-query";
 import { trpc } from "~/libs/trpc";
 import type { AppRouter } from "~/server/routers/_app";
 import { createTRPCMsw, httpLink } from "~/utils/msw-trpc";
+import { transformer } from "~/utils/transformer";
 
 const MockTrpcProvider = ({ children }: { children: ReactNode }) => {
   const [queryClient] = useState(makeQueryClient);
@@ -15,7 +15,7 @@ const MockTrpcProvider = ({ children }: { children: ReactNode }) => {
     trpc.createClient({
       links: [
         TRPCClientHttpLink({
-          transformer: superjson,
+          transformer,
           url: "http://localhost:3000/api/trpc",
         }),
       ],
@@ -40,8 +40,8 @@ export const customRender = (ui: ReactNode) => {
 
 export const trpcMsw = createTRPCMsw<AppRouter>({
   transformer: {
-    input: superjson,
-    output: superjson,
+    input: transformer,
+    output: transformer,
   },
   links: [
     httpLink({
