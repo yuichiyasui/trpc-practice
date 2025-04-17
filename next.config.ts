@@ -1,6 +1,4 @@
-// @ts-check
-
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 import { env } from "./src/server/env";
 
 /**

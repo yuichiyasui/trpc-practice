@@ -1,17 +1,18 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { trpc } from "~/utils/trpc";
-import type { NextPageWithLayout } from "../_app";
+import { trpc } from "~/libs/trpc";
 
 const schema = z.object({
   title: z.string().min(1, { message: "タイトルは必須です" }),
   text: z.string().min(1, { message: "内容は必須です" }),
 });
 
-const PostNewPage: NextPageWithLayout = () => {
+const PostNewPage = () => {
   const router = useRouter();
   const utils = trpc.useUtils();
 

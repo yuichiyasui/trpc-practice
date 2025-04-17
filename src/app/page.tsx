@@ -1,9 +1,10 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
-import { trpc } from "../utils/trpc";
-import type { NextPageWithLayout } from "./_app";
+import { trpc } from "~/libs/trpc";
 
-const IndexPage: NextPageWithLayout = () => {
+const Page = () => {
   const { data, status, fetchNextPage, isFetchingNextPage, hasNextPage } =
     trpc.post.list.useInfiniteQuery(
       {
@@ -91,4 +92,4 @@ const IndexPage: NextPageWithLayout = () => {
   );
 };
 
-export default IndexPage;
+export default Page;

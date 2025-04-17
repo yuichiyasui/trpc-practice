@@ -1,9 +1,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import { setupServer } from "msw/node";
-import PageComp from "~/pages";
-import { customRender, trpc, trpcMsw } from "./utils";
-
-const Page = trpc.withTRPC(PageComp);
+import Page from "~/app/page";
+import { customRender, trpcMsw } from "./utils";
 
 const postListQueryInterceptor = vi.fn();
 
