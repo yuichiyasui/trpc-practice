@@ -1,7 +1,7 @@
-import clsx from 'clsx';
-import Link from 'next/link';
-import { trpc } from '../utils/trpc';
-import type { NextPageWithLayout } from './_app';
+import clsx from "clsx";
+import Link from "next/link";
+import { trpc } from "../utils/trpc";
+import type { NextPageWithLayout } from "./_app";
 
 const IndexPage: NextPageWithLayout = () => {
   const { data, status, fetchNextPage, isFetchingNextPage, hasNextPage } =
@@ -22,18 +22,18 @@ const IndexPage: NextPageWithLayout = () => {
     <div className="bg-gray-800 py-8">
       <h1 className="text-4xl font-bold">tRPC Practice</h1>
 
-      <div className={clsx('py-8')}>
+      <div className={clsx("py-8")}>
         <h2 className="text-3xl font-semibold mb-6">ポスト一覧</h2>
 
         <div className="mb-6">
           {(() => {
-            if (status === 'pending') {
+            if (status === "pending") {
               return <p>Loading...</p>;
             }
 
             return (
               <>
-                <ul className={clsx('grid', 'gap-y-4', 'mb-6')}>
+                <ul className={clsx("grid", "gap-y-4", "mb-6")}>
                   {posts.map((item) => (
                     <li key={item.id}>
                       <article key={item.id}>
@@ -52,19 +52,19 @@ const IndexPage: NextPageWithLayout = () => {
                   <div>
                     <button
                       className={clsx(
-                        'bg-gray-900',
-                        'p-2',
-                        'rounded-md',
-                        'font-semibold',
-                        'disabled:bg-gray-700',
-                        'disabled:text-gray-400',
+                        "bg-gray-900",
+                        "p-2",
+                        "rounded-md",
+                        "font-semibold",
+                        "disabled:bg-gray-700",
+                        "disabled:text-gray-400",
                       )}
                       onClick={() => {
                         fetchNextPage();
                       }}
                       disabled={isFetchingNextPage}
                     >
-                      {isFetchingNextPage ? '読み込み中...' : 'もっと読み込む'}
+                      {isFetchingNextPage ? "読み込み中..." : "もっと読み込む"}
                     </button>
                   </div>
                 )}
@@ -77,10 +77,10 @@ const IndexPage: NextPageWithLayout = () => {
           <Link
             href="/post/new"
             className={clsx(
-              'bg-gray-900',
-              'p-2',
-              'rounded-md',
-              'font-semibold',
+              "bg-gray-900",
+              "p-2",
+              "rounded-md",
+              "font-semibold",
             )}
           >
             ポストの作成

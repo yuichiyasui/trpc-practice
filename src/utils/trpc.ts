@@ -1,16 +1,16 @@
-import { httpBatchStreamLink, loggerLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
+import { httpBatchStreamLink, loggerLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
 
-import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
-import type { NextPageContext } from 'next';
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import type { NextPageContext } from "next";
 // ℹ️ Type-only import:
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export
-import type { AppRouter } from '~/server/routers/_app';
-import { transformer } from './transformer';
+import type { AppRouter } from "~/server/routers/_app";
+import { transformer } from "./transformer";
 
 function getBaseUrl() {
-  if (typeof window !== 'undefined') {
-    return '';
+  if (typeof window !== "undefined") {
+    return "";
   }
   // reference for vercel.com
   if (process.env.VERCEL_URL) {
@@ -59,8 +59,8 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
         // adds pretty logs to your console in development and logs errors in production
         loggerLink({
           enabled: (opts) =>
-            process.env.NODE_ENV === 'development' ||
-            (opts.direction === 'down' && opts.result instanceof Error),
+            process.env.NODE_ENV === "development" ||
+            (opts.direction === "down" && opts.result instanceof Error),
         }),
         httpBatchStreamLink({
           url: `${getBaseUrl()}/api/trpc`,

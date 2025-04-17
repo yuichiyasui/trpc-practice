@@ -1,14 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/router';
-import { useId } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { trpc } from '~/utils/trpc';
-import type { NextPageWithLayout } from '../_app';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/router";
+import { useId } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { trpc } from "~/utils/trpc";
+import type { NextPageWithLayout } from "../_app";
 
 const schema = z.object({
-  title: z.string().min(1, { message: 'タイトルは必須です' }),
-  text: z.string().min(1, { message: '内容は必須です' }),
+  title: z.string().min(1, { message: "タイトルは必須です" }),
+  text: z.string().min(1, { message: "内容は必須です" }),
 });
 
 const PostNewPage: NextPageWithLayout = () => {
@@ -21,11 +21,11 @@ const PostNewPage: NextPageWithLayout = () => {
     setError,
     formState: { errors },
   } = useForm({
-    mode: 'onBlur',
+    mode: "onBlur",
     resolver: zodResolver(schema),
     defaultValues: {
-      title: '',
-      text: '',
+      title: "",
+      text: "",
     },
   });
 
@@ -33,10 +33,10 @@ const PostNewPage: NextPageWithLayout = () => {
     async onSuccess() {
       // refetches posts after a post is added
       await utils.post.list.invalidate();
-      router.push('/');
+      router.push("/");
     },
     onError() {
-      setError('root', { message: '投稿に失敗しました' });
+      setError("root", { message: "投稿に失敗しました" });
     },
   });
 
@@ -72,7 +72,7 @@ const PostNewPage: NextPageWithLayout = () => {
             </div>
             <div>
               <input
-                {...register('title')}
+                {...register("title")}
                 className="focus-visible:outline-dashed outline-offset-4 outline-2 outline-gray-700 w-full rounded-xl px-4 py-3 bg-gray-900"
                 id={titleFieldId}
                 type="text"
@@ -89,7 +89,7 @@ const PostNewPage: NextPageWithLayout = () => {
             </div>
             <div>
               <textarea
-                {...register('text')}
+                {...register("text")}
                 className="resize-none focus-visible:outline-dashed outline-offset-4 outline-2 outline-gray-700 rounded-xl w-full px-4 py-3 bg-gray-900"
                 id={textFieldId}
                 disabled={isPending}
@@ -110,7 +110,7 @@ const PostNewPage: NextPageWithLayout = () => {
               {isPending ? (
                 <span className="animate-pulse">作成中...</span>
               ) : (
-                'ポストを作成'
+                "ポストを作成"
               )}
             </button>
           </div>

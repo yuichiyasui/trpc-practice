@@ -1,12 +1,12 @@
-import NextError from 'next/error';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import NextError from "next/error";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import type { NextPageWithLayout } from '~/pages/_app';
-import type { RouterOutput } from '~/utils/trpc';
-import { trpc } from '~/utils/trpc';
+import type { NextPageWithLayout } from "~/pages/_app";
+import type { RouterOutput } from "~/utils/trpc";
+import { trpc } from "~/utils/trpc";
 
-type PostByIdOutput = RouterOutput['post']['byId'];
+type PostByIdOutput = RouterOutput["post"]["byId"];
 
 function PostItem(props: { post: PostByIdOutput }) {
   const { post } = props;
@@ -17,7 +17,7 @@ function PostItem(props: { post: PostByIdOutput }) {
       </Link>
       <h1 className="text-4xl font-bold">{post.title}</h1>
       <em className="text-gray-400">
-        Created {post.createdAt.toLocaleDateString('en-us')}
+        Created {post.createdAt.toLocaleDateString("en-us")}
       </em>
 
       <p className="py-4 break-all">{post.text}</p>
@@ -43,7 +43,7 @@ const PostViewPage: NextPageWithLayout = () => {
     );
   }
 
-  if (postQuery.status !== 'success') {
+  if (postQuery.status !== "success") {
     return (
       <div className="flex flex-col justify-center h-full px-8 ">
         <div className="w-full bg-zinc-900/70 rounded-md h-10 animate-pulse mb-2"></div>
