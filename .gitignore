@@ -47,3 +47,6 @@ playwright/test-results
 dist
 
 .turbo
+
+# eslint
+.eslintcache
