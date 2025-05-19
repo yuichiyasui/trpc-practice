@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "packageManager": "pnpm@8.15.6+sha256.01c01eeb990e379b31ef19c03e9d06a14afa5250b82e81303f88721c99ff2e6f",
   "scripts": {
+    "dev": "pnpm -F frontend dev",
     "format": "pnpm biome format --write .",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "db:generate": "pnpm -F server generate",
+    "db:seed": "pnpm -F server db-seed",
+    "db:reset": "pnpm -F server db-reset",
+    "db:migrate-dev": "pnpm -F server migrate-dev",
+    "db:migrate": "pnpm -F server migrate",
+    "db:studio": "pnpm -F server prisma-studio"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
