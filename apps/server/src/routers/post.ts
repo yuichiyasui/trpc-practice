@@ -6,7 +6,7 @@ import { prisma } from "../prisma";
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure } from "../trpc";
 
 /**
  * Default selector for Post.

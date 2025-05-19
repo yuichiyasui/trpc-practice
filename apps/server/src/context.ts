@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type * as trpcNext from "@trpc/server/adapters/next";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface CreateContextOptions {
-  // session: Session | null
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/ban-types
+type CreateContextOptions = {};
 
 /**
  * Inner function for `createContext` where we create the context.

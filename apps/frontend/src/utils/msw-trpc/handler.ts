@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import type { TRPCCombinedDataTransformer, TRPCError } from "@trpc/server";
 import type { TRPC_ERROR_CODE_KEY } from "@trpc/server/unstable-core-do-not-import";
 import {
@@ -34,6 +33,7 @@ const getMutationInput = async (
 const createTrpcHandler = (
   procedureType: "query" | "mutation",
   path: string,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   handler: Function | undefined,
   {
     links,
@@ -108,8 +108,10 @@ const createTrpcHandler = (
 };
 
 export const trpc = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   query: (path: string, handler: Function, opts: TRPCMswConfig) =>
     createTrpcHandler("query", path, handler, opts),
+  // eslint-disable-next-line @typescript-eslint/ban-types
   mutation: (path: string, handler: Function, opts: TRPCMswConfig) =>
     createTrpcHandler("mutation", path, handler, opts),
 };

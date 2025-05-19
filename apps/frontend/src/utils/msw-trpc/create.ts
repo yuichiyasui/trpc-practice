@@ -14,7 +14,7 @@ export const createTRPCMsw = <Router extends AnyTRPCRouter>(
         get(target: unknown, lastKey) {
           const procedurePath = pathParts.join(".");
           if (lastKey === "query" || lastKey === "mutation") {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/ban-types
             return (handler: Function) => {
               const result = trpc[lastKey](procedurePath, handler, {
                 links,
