@@ -23,6 +23,9 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
+      - name: Prisma Generate
+        run: pnpm db:generate
+
       - name: Type Check
         run: pnpm type-check
 
