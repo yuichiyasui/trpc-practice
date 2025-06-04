@@ -3,6 +3,10 @@ import { setupServer } from "msw/node";
 import Page from "~/app/page";
 import { customRender, trpcMsw } from "./utils";
 
+vi.mock("~/flags", () => ({
+  searchPostsFlag: vi.fn(() => Promise.resolve(false)),
+}));
+
 const postListQueryInterceptor = vi.fn();
 
 const server = setupServer(

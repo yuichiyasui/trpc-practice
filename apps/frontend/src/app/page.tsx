@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { Suspense } from "react";
 import { PostList } from "~/components/post-list";
+import { searchPostsFlag } from "~/flags";
 import { HydrateClient, trpc } from "~/libs/trpc/server";
 
 type Props = {
@@ -17,6 +18,8 @@ const Page = async ({ searchParams }: Props) => {
     limit,
   });
 
+  const canSearchPosts = await searchPostsFlag();
+
   return (
     <HydrateClient>
       <div className="bg-gray-800 py-8">
@@ -24,6 +27,12 @@ const Page = async ({ searchParams }: Props) => {
 
         <div className={clsx("py-8")}>
           <h2 className="text-3xl font-semibold mb-6">ポスト一覧</h2>
+          {canSearchPosts && (
+            <p className="text-green-500 mb-4">
+              Search posts flag is enabled! (This text should not be visible in
+              production.)
+            </p>
+          )}
 
           <div className="mb-6">
             <Suspense fallback={<p>Loading...</p>}>
