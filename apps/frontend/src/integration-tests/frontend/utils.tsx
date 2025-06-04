@@ -6,7 +6,7 @@ import { httpLink as TRPCClientHttpLink } from "@trpc/client";
 import { type ReactNode, useState } from "react";
 import SuperJSON from "superjson";
 import { makeQueryClient } from "~/libs/react-query";
-import { trpc } from "~/libs/trpc";
+import { trpc } from "~/libs/trpc/client";
 import { createTRPCMsw, httpLink } from "~/utils/msw-trpc";
 
 const MockTrpcProvider = ({ children }: { children: ReactNode }) => {

@@ -4,7 +4,7 @@ import NextError from "next/error";
 import { useParams } from "next/navigation";
 
 import Link from "next/link";
-import { trpc } from "~/libs/trpc";
+import { trpc } from "~/libs/trpc/client";
 
 const PostViewPage = () => {
   const params = useParams<{ postId: string }>();

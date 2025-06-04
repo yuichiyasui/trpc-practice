@@ -1,94 +1,52 @@
-"use client";
-
 import clsx from "clsx";
 import Link from "next/link";
-import { trpc } from "~/libs/trpc";
+import { Suspense } from "react";
+import { PostList } from "~/components/post-list";
+import { HydrateClient, trpc } from "~/libs/trpc/server";
 
-const Page = () => {
-  const { data, status, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    trpc.post.list.useInfiniteQuery(
-      {
-        limit: 5,
-      },
-      {
-        getNextPageParam(lastPage) {
-          return lastPage.nextCursor;
-        },
-      },
-    );
+type Props = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 
-  const posts = data?.pages.flatMap((page) => page.items) ?? [];
+const Page = async ({ searchParams }: Props) => {
+  const params = await searchParams;
+  const page = params.page;
+  const limit = typeof page === "string" ? Number.parseInt(page, 10) * 5 : 5;
+
+  void trpc.post.list.prefetchInfinite({
+    limit,
+  });
 
   return (
-    <div className="bg-gray-800 py-8">
-      <h1 className="text-4xl font-bold">tRPC Practice</h1>
+    <HydrateClient>
+      <div className="bg-gray-800 py-8">
+        <h1 className="text-4xl font-bold">tRPC Practice</h1>
 
-      <div className={clsx("py-8")}>
-        <h2 className="text-3xl font-semibold mb-6">ポスト一覧</h2>
+        <div className={clsx("py-8")}>
+          <h2 className="text-3xl font-semibold mb-6">ポスト一覧</h2>
 
-        <div className="mb-6">
-          {(() => {
-            if (status === "pending") {
-              return <p>Loading...</p>;
-            }
+          <div className="mb-6">
+            <Suspense fallback={<p>Loading...</p>}>
+              <PostList limit={limit} />
+            </Suspense>
+          </div>
 
-            return (
-              <>
-                <ul className={clsx("grid", "gap-y-4", "mb-6")}>
-                  {posts.map((item) => (
-                    <li key={item.id}>
-                      <article key={item.id}>
-                        <h3 className="text-2xl font-semibold">{item.title}</h3>
-                        <Link
-                          className="text-gray-400"
-                          href={`/post/${item.id}`}
-                        >
-                          詳細
-                        </Link>
-                      </article>
-                    </li>
-                  ))}
-                </ul>
-                {hasNextPage && (
-                  <div>
-                    <button
-                      className={clsx(
-                        "bg-gray-900",
-                        "p-2",
-                        "rounded-md",
-                        "font-semibold",
-                        "disabled:bg-gray-700",
-                        "disabled:text-gray-400",
-                      )}
-                      onClick={() => {
-                        fetchNextPage();
-                      }}
-                      disabled={isFetchingNextPage}
-                    >
-                      {isFetchingNextPage ? "読み込み中..." : "もっと読み込む"}
-                    </button>
-                  </div>
-                )}
-              </>
-            );
-          })()}
-        </div>
-
-        <div>
-          <Link
-            href="/post/new"
-            className={clsx(
-              "bg-gray-900",
-              "p-2",
-              "rounded-md",
-              "font-semibold",
-            )}
-          >
-            ポストの作成
-          </Link>
+          <div>
+            <Link
+              href="/post/new"
+              className={clsx(
+                "bg-gray-900",
+                "p-2",
+                "rounded-md",
+                "font-semibold",
+              )}
+            >
+              ポストの作成
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </HydrateClient>
   );
 };
 
