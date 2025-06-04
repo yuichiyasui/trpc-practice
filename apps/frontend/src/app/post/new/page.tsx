@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { trpc } from "~/libs/trpc";
+import { trpc } from "~/libs/trpc/client";
 
 const schema = z.object({
   title: z.string().min(1, { message: "タイトルは必須です" }),

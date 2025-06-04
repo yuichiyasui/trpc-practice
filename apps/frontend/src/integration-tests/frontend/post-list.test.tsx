@@ -37,7 +37,8 @@ afterAll(() => {
 });
 
 test("ポスト一覧画面が表示される", async () => {
-  customRender(<Page />);
+  const searchParams = Promise.resolve({});
+  customRender(await Page({ searchParams }));
 
   expect(
     screen.getByRole("heading", { name: "ポスト一覧", level: 2 }),
@@ -45,6 +46,9 @@ test("ポスト一覧画面が表示される", async () => {
 
   await waitFor(() => {
     expect(postListQueryInterceptor).toHaveBeenCalledTimes(1);
+  });
+  expect(postListQueryInterceptor).toHaveBeenCalledWith({
+    input: { limit: 5, direction: "forward" },
   });
 
   // 一覧の検証

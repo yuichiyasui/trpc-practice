@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { TRPCProvider } from "~/libs/trpc";
+import { TRPCProvider } from "~/libs/trpc/client";
 
 import "~/styles/globals.css";
 
