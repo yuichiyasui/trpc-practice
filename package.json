@@ -6,6 +6,8 @@
     "dev": "pnpm -F frontend dev",
     "format": "pnpm biome format --write .",
     "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "test": "turbo test",
     "db:generate": "pnpm -F server generate",
     "db:seed": "pnpm -F server db-seed",
     "db:reset": "pnpm -F server db-reset",
