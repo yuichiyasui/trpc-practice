@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
