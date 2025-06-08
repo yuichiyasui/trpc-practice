@@ -1,5 +1,6 @@
-import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "url";
+import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -11,6 +12,9 @@ export default defineConfig({
     alias: {
       "~/": fileURLToPath(new URL("./src/", import.meta.url)),
     },
+    env: dotenv.config({
+      path: "./.env.test",
+    }).parsed,
     setupFiles: ["./vitest.setup.ts", "dotenv/config"],
   },
 });
